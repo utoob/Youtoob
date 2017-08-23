@@ -20,6 +20,8 @@
   "dependencies": {
     "bcrypt": "^1.0.2",
     "express": "^4.15.4",
-    "mongoose": "^4.11.7"
+    "mongoose": "^4.11.7",
+    "mongoose-unique-validator": "^1.0.5",
+    "slugify": "^1.2.1"
   }
 }
