@@ -6,7 +6,7 @@ var UserSchema = new mongoose.Schema({
   username: String,
   passwordHash: String,
   image: String,
-  favorites: [{ type: mongoose.Schema.types.ObjectId, ref: 'Post' }]
+  favorites: [{ type: mongoose.Schema.types.ObjectId, ref: 'Video' }]
 }, { 
   timestamps: true 
 })
