@@ -4,11 +4,11 @@ import express from 'express'
 
 const app = express()
 
-app.use('/static', express.static(path.join(__dirname, 'temp')))
-
-app.get('/', (req, res) => {
+app.get('/home', (req, res) => {
   res.send('Home Route')
 })
+
+app.get('*', express.static(`./public`))
 
 const server = app.listen(process.env.PORT || 3000, () => {
   console.log(`Listening on port ${server.address().port}`)
