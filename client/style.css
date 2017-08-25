@@ -1,0 +1,113 @@
+body {
+  background: #f1f1f1;
+}
+
+.App {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.container {
+  margin: 0 1em;
+}
+
+.c-button {
+  border-radius: 2px;
+  font-weight: bold;
+}
+
+.mt-1 {
+  margin-top: 1em;
+}
+
+.app-nav {
+  background: white;
+  padding-top: 10px;
+  padding-bottom: 13px;
+  padding-left: 1em;
+  padding-right: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-nav-left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-nav-left > * {
+  margin-right: 1em;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+.app-nav-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.app-nav-list > *:not(:last-child) {
+  padding-top: 4px;
+  margin-right: 1em;
+}
+
+.br2 {
+  border-radius: 2px !important;
+}
+
+.upload-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.video-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: white;
+}
+
+.video-list-entry {
+  display: flex;
+}
+
+.video-list-entry-title {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.stuff {
+  margin-left: 0.5em;
+  display: flex;
+  flex-direction: column;
+}
