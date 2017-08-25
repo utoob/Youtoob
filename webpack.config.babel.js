@@ -5,7 +5,7 @@ const WDS_PORT = 7000
 
 export default {
   entry: [
-    './client/app.jsx',
+    './client',
   ],
   output: {
     filename: 'js/bundle.js',
@@ -14,9 +14,8 @@ export default {
   module: {
     rules: [
       { test: /\.(js|jsx)$/, use: 'babel-loader', exclude: /node_modules/ },
-    ],
-    loaders: [
-      { test: /\.css$/, loader: 'style-loader!css-loader' },
+      { test: /\.css$/, use: [{ loader: 'style-loader' }, { loader: 'css-loader' }] },
+      { test: /\.(eot|svg|ttf|woff|woff2)$/, use: 'file-loader' },
     ],
   },
   devtool: 'source-map',
