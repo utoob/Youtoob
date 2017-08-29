@@ -1,13 +1,17 @@
+import './db'
 import fs from 'fs'
 import path from 'path'
 import express from 'express'
 
+import videoRoutes from './routes/videos'
+
 const app = express()
 
-app.use(express.static(`./public`))
+app.use('/api', videoRoutes)
 
-app.get('/home', (req, res) => {
-  res.send('Home Route')
+// Route that serves video
+app.get('/watch/:id', (req, res) => {
+  res.sendFile(path.join(__dirname, `../public/${id}`))
 })
 
 app.get('*', (req, res) => {

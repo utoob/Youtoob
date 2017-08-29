@@ -7,6 +7,8 @@ import VideoList from './VideoList'
 import UploadForm from './UploadForm'
 import Watch from './Watch'
 
+window.api = require('../utils/api')
+
 const App = () => {
   return (
     <div className="App">
