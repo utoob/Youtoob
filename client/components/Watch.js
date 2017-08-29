@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+
+import * as api from '../utils/api'
 import VideoPlayer from './VideoPlayer'
 import VideoList from './VideoList'
 
@@ -10,13 +12,24 @@ class Watch extends Component {
     }
   }
 
+  componentDidMount() {
+    const id = this.props.match.params.id
+    api
+      .getVideo(id)
+      .then((video) => {
+        this.setState({
+          video: video
+        })
+      })
+  }
+
   render() {
     if (this.state.video) {
       let videoOptions = {
         autoplay: false,
         controls: true,
         sources: [{
-          src: `http://localhost:3000/static/${this.state.video.name}`,
+          src: api.watchVideoUrl(this.state.video),
           type: 'video/mp4'
         }],
         fluid: true
@@ -29,6 +42,7 @@ class Watch extends Component {
             <p>{this.state.video.description}</p>
           </div>
           <div className="o-grid__cell">
+            <h3>Recommended to Watch:</h3>
             <VideoList />
           </div>
         </div>
