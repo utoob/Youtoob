@@ -10,34 +10,27 @@ class Watch extends Component {
     this.state = {
       video: null
     }
+
+    this.setVideoState = ((video) => this.setState({ video: video })).bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const id = nextProps.match.params.id
+    api.getVideo(id).then(this.setVideoState)
   }
 
   componentDidMount() {
     const id = this.props.match.params.id
-    api
-      .getVideo(id)
-      .then((video) => {
-        this.setState({
-          video: video
-        })
-      })
+    api.getVideo(id).then(this.setVideoState)
   }
 
   render() {
     if (this.state.video) {
-      let videoOptions = {
-        autoplay: false,
-        controls: true,
-        sources: [{
-          src: api.watchVideoUrl(this.state.video),
-          type: 'video/mp4'
-        }],
-        fluid: true
-      };
+      const videoUrl = api.watchVideoUrl(this.state.video)
       return (
         <div className="o-grid o-grid--small-full o-grid--medium-full mt-1">
           <div className="o-grid__cell o-grid__cell--width-70">
-            <VideoPlayer {...videoOptions} />
+            <VideoPlayer videoUrl={videoUrl} />
             <h3>{this.state.video.title}</h3>
             <p>{this.state.video.description}</p>
           </div>

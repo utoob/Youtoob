@@ -15,8 +15,8 @@ class Nav extends Component {
             <div className="o-field">
               <input className="c-field br2" size="70"/>
             </div>
-            <button className="c-button c-button--brand br2">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<Icon icon='search' size="1.2em"/>
+            <button className="c-button c-button--brand">
+              <Icon icon='search' size="1.2em"/>
             </button>
           </div>
         </div>

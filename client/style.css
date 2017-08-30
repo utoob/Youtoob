@@ -47,6 +47,10 @@ body {
   margin-top: 1em;
 }
 
+.mb-1 {
+  margin-bottom: 1em;
+}
+
 .app-nav {
   background: white;
   padding-top: 10px;
@@ -101,11 +105,15 @@ body {
   list-style: none;
   padding: 0;
   margin: 0;
-  background: white;
 }
 
 .video-list-entry {
   display: flex;
+  background: white;
+}
+
+.video-list-entry:not(:last-child) {
+  margin-bottom: 1em;
 }
 
 .video-list-entry-title {

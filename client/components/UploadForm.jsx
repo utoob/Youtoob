@@ -1,28 +1,35 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+
 import * as api from '../utils/api'
+import FormElement from './FormElement'
+import Progress from './Progress'
 
 class UploadForm extends Component {
   constructor(props) {
     super(props)
+    
     this.state = {
       percentCompleted: 0,
       title: '',
       description: ''
     }
 
-    this.onInputChange = this.onInputChange.bind(this)
-    this.onFileChange = this.onFileChange.bind(this)
+    this.onFormElementChange = this.onFormElementChange.bind(this)
     this.onUploadProgress = this.onUploadProgress.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  onInputChange(e) {
-    this.setState({[e.target.name]: e.target.value})
-  }
-
-  onFileChange(e) {
-    this.setState({[e.target.name]: e.target.files[0]})
+  /* Generic onChange handler for form inputs.
+   * Sets the name of the input as the key in the state.
+   * For e.g. <input name="gender" onChange={this.onFormElementChange} />
+   *   will set the state to { gender: <whatever value> } upon change.
+   */
+  onFormElementChange(e) {
+    const value = e.target.type === 'file' 
+      ? e.target.files[0]
+      : e.target.value
+    this.setState({ [e.target.name]: value })
   }
 
   onUploadProgress(progressEvent) {
@@ -46,44 +53,44 @@ class UploadForm extends Component {
 
   render() {
     return (
-      <form className="upload-form" onSubmit={this.onSubmit}>
+      <form 
+        className="upload-form" 
+        onSubmit={this.onSubmit}
+      >
         <h2>Upload a Video</h2> 
-        <div className="o-form-element">
-          <label className="c-label" htmlFor="title">Title:</label>
-          <input 
-            name="title" 
-            className="c-field" 
-            onChange={this.onInputChange} 
-            defaultValue={this.state.title} 
-          />
-        </div>
-        <div className="o-form-element">
-          <label className="c-label" htmlFor="description">Description:</label>
-          <textarea 
-            name="description" 
-            className="c-field" 
-            onChange={this.onInputChange} 
-            defaultValue={this.state.title}>
-          </textarea>
-        </div>
-        <div className="o-form-element">
-          <label className="c-label" htmlFor="videoFile">Video File:</label>
-          <input
-            type="file" 
-            name="videoFile" 
-            className="c-field" 
-            onChange={this.onFileChange} />
-        </div>
-        <br />
-        <div className="c-progress">
-          <div 
-            className="c-progress__bar c-progress__bar--success" 
-            style={{width: `${this.state.percentCompleted}%`}}>
-            {this.state.percentCompleted}%
-          </div>
-        </div>
-        <br />
-        <input type="submit" className="c-button c-button--success" value="Submit" />
+
+        <FormElement 
+          name="title"
+          label="Title:"
+          onChange={this.onFormElementChange}
+          defaultValue={this.state.title}
+        />
+
+        <FormElement 
+          name="description"
+          label="Description:"
+          onChange={this.onFormElementChange}
+          defaultValue={this.state.description}
+        />
+
+        <FormElement 
+          type="file"
+          name="videoFile"
+          label="Video File:"
+          onChange={this.onFormElementChange}
+        />
+
+        <Progress
+          progress={this.state.percentCompleted}
+          label={`${this.state.percentCompleted}%`}
+        /> 
+
+        <input 
+          type="submit" 
+          className="c-button c-button--success" 
+          value="Submit" 
+        />
+
       </form>
     )
   }
