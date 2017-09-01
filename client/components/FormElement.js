@@ -1,15 +1,24 @@
 import React from 'react'
 
-const FormElement = ({ type="text", name, label, defaultValue, onChange }) => {
+const FormElement = (props) => {
+  const { 
+    Tag="input", 
+    type="text", 
+    name, 
+    label, 
+    defaultValue, 
+    onChange 
+  } = props
+
   return (
     <div className="o-form-element">
       <label className="c-label" htmlFor={name}>{label}</label>
-      <input
+      <Tag
         type={type}
         name={name}
         className="c-field" 
         onChange={onChange} 
-        defaultValue={defaultValue} 
+        defaultValue={defaultValue}
       />
     </div>
   )

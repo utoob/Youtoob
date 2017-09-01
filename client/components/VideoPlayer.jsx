@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import videojs from 'video.js'
 import 'video.js/dist/video-js.css'
 
@@ -12,18 +12,21 @@ const videoOptions = (url) => ({
   fluid: true
 })
 
-class VideoPlayer extends Component {
+class VideoPlayer extends PureComponent {
+  componentWillReceiveProps(nextProps) {
+    this.player.src({
+      type: 'video/mp4',
+      src: nextProps.videoUrl
+    })
+  }
   componentDidMount() {
     const videoUrl = this.props.videoUrl
-    this.player = videojs(this.videoNode, videoOptions(videoUrl), this.onPlayerReady)
+    this.player = videojs(this.videoNode, videoOptions(videoUrl))
   }
   componentWillUnmount() {
     if (this.player) {
       this.player.dispose()
     }
-  }
-  onPlayerReady() {
-    console.log('onPlayerReady', this)
   }
   render() {
     return (

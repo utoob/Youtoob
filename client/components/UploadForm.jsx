@@ -54,7 +54,7 @@ class UploadForm extends Component {
   render() {
     return (
       <form 
-        className="upload-form" 
+        className="youtoob-form" 
         onSubmit={this.onSubmit}
       >
         <h2>Upload a Video</h2> 
@@ -66,7 +66,8 @@ class UploadForm extends Component {
           defaultValue={this.state.title}
         />
 
-        <FormElement 
+        <FormElement
+          Tag="textarea"
           name="description"
           label="Description:"
           onChange={this.onFormElementChange}

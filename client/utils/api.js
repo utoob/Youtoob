@@ -29,9 +29,9 @@ export const getVideo = (id) => {
     .then(extractData)
 }
 
-export const getVideos = () => {
+export const getVideos = (q) => {
   return instance
-    .get('/videos')
+    .get('/videos', { params: { q } })
     .then(extractData)
 }
 
