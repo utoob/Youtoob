@@ -10,7 +10,14 @@ const upload = multer({ dest: 'public' })
 /* Route handlers */
 
 const getVideos = (req, res) => {
-  Video.find({}).then((videos) => {
+  const q = req.query.q
+
+  const query = Object.assign(
+    {},
+    q && { $text: { $search: q } }
+  )
+
+  Video.find(query).then((videos) => {
     res.json(videos)
   })
 }

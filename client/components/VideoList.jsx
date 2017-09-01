@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import * as api from '../utils/api'
 import VideoListEntry from './VideoListEntry'
@@ -7,16 +7,26 @@ import VideoListEntry from './VideoListEntry'
 class VideoList extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      videos: []
-    }
+    this.state = { videos: [] }
+    this.searchVideos = this.searchVideos.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    /* Extracts query string from nextProps */
+    const qs = new URLSearchParams(nextProps.location.search)
+    this.searchVideos(qs.get('q'))
   }
 
   componentDidMount() {
+    /* Extracts query string from this.props */
+    const qs = new URLSearchParams(this.props.location.search) 
+    this.searchVideos(qs.get('q'))
+  }
+
+  searchVideos(query) {
     api
-      .getVideos()
+      .getVideos(query)
       .then((videos) => {
-        console.log(videos)
         this.setState({ 
           videos: videos
         })
@@ -36,4 +46,4 @@ class VideoList extends Component {
   }
 }
 
-export default VideoList
+export default withRouter(VideoList)

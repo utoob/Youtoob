@@ -31,7 +31,7 @@ class Watch extends Component {
         <div className="o-grid o-grid--small-full o-grid--medium-full mt-1">
           <div className="o-grid__cell o-grid__cell--width-70">
             <VideoPlayer videoUrl={videoUrl} />
-            <h3>{this.state.video.title}</h3>
+            <h2>{this.state.video.title}</h2>
             <p>{this.state.video.description}</p>
           </div>
           <div className="o-grid__cell">
