@@ -2,12 +2,16 @@ import './db'
 import fs from 'fs'
 import path from 'path'
 import express from 'express'
+import bodyParser from 'body-parser'
 
+import userRoutes from './routes/users'
 import videoRoutes from './routes/videos'
 
 const app = express()
 
-app.use('/api', videoRoutes)
+app.use(bodyParser.json())
+
+app.use('/api', userRoutes, videoRoutes)
 
 // Route that serves video
 app.get('/watch/:id', (req, res) => {

@@ -4,22 +4,33 @@ import { Link } from 'react-router-dom'
 import * as api from '../utils/api'
 import FormElement from './FormElement'
 
-class Register extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props)
-    this.state = { username: '', password: '', confirmPassword: '' }
-    
+    this.state = { username: '', password: '', errors: null } 
+
     this.onSubmit = this.onSubmit.bind(this)
     this.onFormElementChange = this.onFormElementChange.bind(this)
   }
 
   onSubmit(e) {
     e.preventDefault()
+    api.login({
+      username: this.state.username,
+      password: this.state.password
+    })
   }
 
   onFormElementChange(e) {
     const value = e.target.value
     this.setState({ [e.target.name]: value })
+  }
+
+  renderError(errors) {
+    console.log(errors)
+    if (errors) {
+
+    }
   }
 
   render() {
@@ -29,7 +40,7 @@ class Register extends Component {
         onSubmit={this.onSubmit}
       >
 
-        <h2>Signup to Youtoob:</h2> 
+        <h2>Login to Youtoob:</h2> 
 
         <FormElement 
           name="username"
@@ -46,22 +57,14 @@ class Register extends Component {
           defaultValue={this.state.password}
         />
 
-        <FormElement 
-          type="password"
-          name="confirmPassword"
-          label="Password:"
-          onChange={this.onFormElementChange}
-          defaultValue={this.state.confirmPassword}
-        />
-
         <div className="mt-1 mb-1">
-          Already have an account? <Link to="/login">Login here.</Link>
+          Don't have an account? <Link to="/register">Register here.</Link>
         </div>
 
         <input 
           type="submit" 
           className="c-button c-button--info" 
-          value="Signup" 
+          value="Login" 
         />
 
       </form>
@@ -69,4 +72,4 @@ class Register extends Component {
   }
 }
 
-export default Register
+export default LoginForm
