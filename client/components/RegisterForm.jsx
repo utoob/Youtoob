@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom'
 import * as api from '../utils/api'
 import FormElement from './FormElement'
 
-class Login extends Component {
+class RegisterForm extends Component {
   constructor(props) {
     super(props)
-    this.state = { username: '', password: '' } 
-
+    this.state = { username: '', password: '', confirmPassword: '' }
+    
     this.onSubmit = this.onSubmit.bind(this)
     this.onFormElementChange = this.onFormElementChange.bind(this)
   }
@@ -29,7 +29,7 @@ class Login extends Component {
         onSubmit={this.onSubmit}
       >
 
-        <h2>Login to Youtoob:</h2> 
+        <h2>Signup to Youtoob:</h2> 
 
         <FormElement 
           name="username"
@@ -46,14 +46,22 @@ class Login extends Component {
           defaultValue={this.state.password}
         />
 
+        <FormElement 
+          type="password"
+          name="confirmPassword"
+          label="Password:"
+          onChange={this.onFormElementChange}
+          defaultValue={this.state.confirmPassword}
+        />
+
         <div className="mt-1 mb-1">
-          Don't have an account? <Link to="/register">Register here.</Link>
+          Already have an account? <Link to="/login">Login here.</Link>
         </div>
 
         <input 
           type="submit" 
           className="c-button c-button--info" 
-          value="Login" 
+          value="Signup" 
         />
 
       </form>
@@ -61,4 +69,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default RegisterForm

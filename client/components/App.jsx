@@ -6,8 +6,8 @@ import Nav from './Nav'
 import VideoList from './VideoList'
 import UploadForm from './UploadForm'
 import Watch from './Watch'
-import Login from './Login'
-import Register from './Register'
+import LoginForm from './LoginForm'
+import RegisterForm from './RegisterForm'
 
 window.api = require('../utils/api')
 
@@ -19,8 +19,8 @@ const App = () => {
         <Route path='/' component={VideoList} exact />
         <Route path='/videos/new' component={UploadForm} exact />
         <Route path='/videos/:id' component={Watch} exact />
-        <Route path='/login' component={Login} exact />
-        <Route path='/register' component={Register} exact />
+        <Route path='/login' component={LoginForm} exact />
+        <Route path='/register' component={RegisterForm} exact />
       </Switch>
     </div>
   )
