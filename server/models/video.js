@@ -33,11 +33,6 @@ VideoSchema.index(
   }
 )
 
-/* Static Methods */
-VideoSchema.statics.search = function(searchString) {
-  return this.find()
-}
-
 var Video = mongoose.model('Video', VideoSchema)
 
 export default Video

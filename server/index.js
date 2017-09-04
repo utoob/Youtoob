@@ -13,11 +13,6 @@ app.use(bodyParser.json())
 
 app.use('/api', userRoutes, videoRoutes)
 
-// Route that serves video
-app.get('/watch/:id', (req, res) => {
-  res.sendFile(path.join(__dirname, `../public/${id}`))
-})
-
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'))
 })
