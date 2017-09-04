@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
+
+import queryStringToObject from '../utils/queryStringToObject'
 import Icon from './Icon'
 
 class SearchBar extends Component {
   constructor(props) {
     super(props)
     /* Sets the initial state of SearchBar */
-    const qs = new URLSearchParams(props.location.search)
-    this.state = { query: qs.get('q') }
+    const qs = queryStringToObject(props.location.search)
+    this.state = { query: qs.q }
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)

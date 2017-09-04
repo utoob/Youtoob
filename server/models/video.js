@@ -4,7 +4,8 @@ var VideoSchema = new mongoose.Schema({
   title: String,
   description: String,
   filename: String,
-  publisher: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  uploader: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  viewCount: { type: Number, default: 0 }
 }, { 
   timestamps: true 
 })

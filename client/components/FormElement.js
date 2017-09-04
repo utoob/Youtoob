@@ -5,18 +5,23 @@ const FormElement = (props) => {
     Tag="input", 
     type="text", 
     name, 
-    label, 
+    label,
+    required,
     defaultValue, 
-    onChange 
+    onChange,
+    error
   } = props
 
   return (
     <div className="o-form-element">
-      <label className="c-label" htmlFor={name}>{label}</label>
+      <label className={`c-label ${error ? 'u-color-error' : ''}`} htmlFor={name}>
+        {label} {error && error.message && <small className="">{error.message}</small>}
+      </label>
       <Tag
         type={type}
         name={name}
-        className="c-field" 
+        required={required}
+        className="c-field"
         onChange={onChange} 
         defaultValue={defaultValue}
       />

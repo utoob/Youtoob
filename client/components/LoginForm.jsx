@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import * as api from '../utils/api'
 import FormElement from './FormElement'
@@ -7,7 +7,7 @@ import FormElement from './FormElement'
 class LoginForm extends Component {
   constructor(props) {
     super(props)
-    this.state = { username: '', password: '', errors: null } 
+    this.state = { username: '', password: '', error: null } 
 
     this.onSubmit = this.onSubmit.bind(this)
     this.onFormElementChange = this.onFormElementChange.bind(this)
@@ -18,19 +18,16 @@ class LoginForm extends Component {
     api.login({
       username: this.state.username,
       password: this.state.password
+    }).then(() => {
+      this.props.history.push('/')
+    }).catch((err) => {
+      this.setState({ error: 'Invalid username or password.' })
     })
   }
 
   onFormElementChange(e) {
     const value = e.target.value
-    this.setState({ [e.target.name]: value })
-  }
-
-  renderError(errors) {
-    console.log(errors)
-    if (errors) {
-
-    }
+    this.setState({ [e.target.name]: value, error: null })
   }
 
   render() {
@@ -61,6 +58,8 @@ class LoginForm extends Component {
           Don't have an account? <Link to="/register">Register here.</Link>
         </div>
 
+        {this.state.error && <div className="u-color-error mb-1">{this.state.error}</div>}
+
         <input 
           type="submit" 
           className="c-button c-button--info" 
@@ -72,4 +71,4 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm
+export default withRouter(LoginForm)

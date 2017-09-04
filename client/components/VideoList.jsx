@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 
 import * as api from '../utils/api'
+import queryStringToObject from '../utils/queryStringToObject'
 import VideoListEntry from './VideoListEntry'
 
 class VideoList extends Component {
@@ -13,14 +14,14 @@ class VideoList extends Component {
 
   componentWillReceiveProps(nextProps) {
     /* Extracts query string from nextProps */
-    const qs = new URLSearchParams(nextProps.location.search)
-    this.searchVideos(qs.get('q'))
+    const qs = queryStringToObject(nextProps.location.search)
+    this.searchVideos(qs.q)
   }
 
   componentDidMount() {
     /* Extracts query string from this.props */
-    const qs = new URLSearchParams(this.props.location.search) 
-    this.searchVideos(qs.get('q'))
+    const qs = queryStringToObject(this.props.location.search) 
+    this.searchVideos(qs.q)
   }
 
   searchVideos(query) {

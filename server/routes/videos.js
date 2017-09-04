@@ -2,7 +2,10 @@ import express from 'express'
 import mongoose from 'mongoose'
 import multer from 'multer'
 import path from 'path'
+
+import * as auth from '../auth'
 import Video from '../models/video'
+import User from '../models/user'
 
 const router = express.Router()
 const upload = multer({ dest: 'public' })
@@ -14,7 +17,7 @@ const getVideos = (req, res) => {
 
   const query = Object.assign(
     {},
-    q && { $text: { $search: q } }
+    q && { $text: { $search: q } } // adds a text search if query is defined.
   )
 
   Video.find(query).then((videos) => {
@@ -24,27 +27,34 @@ const getVideos = (req, res) => {
 
 const getVideo = (req, res) => {
   const id = req.params.id
-  Video.findById(id).then((video) => {
-    res.json(video)
-  })
+  Video.findById(id)
+    .populate('uploader')
+    .then((video) => {
+      res.json(video)
+    })
 }
 
 const watchVideo = (req, res) => {
   const id = req.params.id
-  Video.findById(id).then((video) => {
+  const query = { _id: id }
+  const update = { $inc: { viewCount: 1 } }
+  Video.findOneAndUpdate(query, update).then((video) => {
     const filename = video.filename
     res.sendFile(path.join(__dirname, `../../public/${filename}`))
   })
 }
 
 const postVideos = (req, res) => {
-  const video = new Video({ 
-    title: req.body.title,
-    description: req.body.description,
-    filename: req.file.filename
-  })
-  video
-    .save()
+  const videoAttributes = Object.assign(
+    { 
+      title: req.body.title,
+      description: req.body.description,
+      filename: req.file.filename,
+    },
+    req.user && { uploader: req.user._id } // attaches the id if user is defined
+  )
+
+  new Video(videoAttributes).save()
     .then((video) => {
       res.json(video)
     })
@@ -58,6 +68,6 @@ router.get('/videos/:id', getVideo)
 
 router.get('/videos/:id/watch', watchVideo)
 
-router.post('/videos', upload.single('videoFile'), postVideos)
+router.post('/videos', auth.optional, upload.single('videoFile'), postVideos)
 
 export default router
