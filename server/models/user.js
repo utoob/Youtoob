@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import uniqueValidator from 'mongoose-unique-validator'
 import jwt from 'jsonwebtoken'
 
-const SECRET = 'Ndmm3cVvxFdNaGPfL14gcoYzxqgcgI4R'
+import { SECRET } from '../config'
 
 var UserSchema = new mongoose.Schema({
   username: {
@@ -54,7 +54,7 @@ UserSchema.methods.generateJWT = function() {
 
   return jwt.sign(
     {
-      id: this._id,
+      _id: this._id,
       username: this.username,
       exp: parseInt(exp.getTime() / 1000, 10),
     },
@@ -67,6 +67,13 @@ UserSchema.methods.toAuthJSON = function() {
     _id: this._id,
     username: this.username,
     token: this.generateJWT()
+  }
+}
+
+UserSchema.methods.toJSON = function() {
+  return {
+    _id: this._id,
+    username: this.username
   }
 }
 

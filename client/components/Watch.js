@@ -27,11 +27,13 @@ class Watch extends Component {
   render() {
     if (this.state.video) {
       const videoUrl = api.watchVideoUrl(this.state.video)
+      const uploaderName = this.state.video.uploader && this.state.video.uploader.username || 'Anonymous'
       return (
         <div className="o-grid o-grid--small-full o-grid--medium-full mt-1">
           <div className="o-grid__cell o-grid__cell--width-70">
             <VideoPlayer videoUrl={videoUrl} />
             <h2>{this.state.video.title}</h2>
+            <p>Uploaded by: {uploaderName}</p>
             <p>{this.state.video.description}</p>
           </div>
           <div className="o-grid__cell">

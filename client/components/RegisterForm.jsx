@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 import * as api from '../utils/api'
 import FormElement from './FormElement'
@@ -7,7 +7,7 @@ import FormElement from './FormElement'
 class RegisterForm extends Component {
   constructor(props) {
     super(props)
-    this.state = { username: '', password: '', confirmPassword: '' }
+    this.state = { username: '', password: '', confirmPassword: '', error: null, errors: {} }
     
     this.onSubmit = this.onSubmit.bind(this)
     this.onFormElementChange = this.onFormElementChange.bind(this)
@@ -15,11 +15,26 @@ class RegisterForm extends Component {
 
   onSubmit(e) {
     e.preventDefault()
+    const { password, confirmPassword } = this.state
+    const passwordDoesNotMatch = password !== confirmPassword
+
+    if (passwordDoesNotMatch) {
+      this.setState({ error: 'Password does not match.' })
+    } else {
+      api.register({
+        username: this.state.username,
+        password: this.state.password
+      }).then(() => {
+        this.props.history.push('/')
+      }).catch((errors) => {
+        this.setState({ errors: errors.response.data })
+      })
+    }
   }
 
   onFormElementChange(e) {
     const value = e.target.value
-    this.setState({ [e.target.name]: value })
+    this.setState({ [e.target.name]: value, error: null, errors: {} })
   }
 
   render() {
@@ -33,15 +48,18 @@ class RegisterForm extends Component {
 
         <FormElement 
           name="username"
-          label="Username:"
+          label="* Username:"
+          required
           onChange={this.onFormElementChange}
           defaultValue={this.state.username}
+          error={this.state.errors.username}
         />
 
         <FormElement 
           type="password"
           name="password"
-          label="Password:"
+          label="* Password:"
+          required
           onChange={this.onFormElementChange}
           defaultValue={this.state.password}
         />
@@ -49,7 +67,8 @@ class RegisterForm extends Component {
         <FormElement 
           type="password"
           name="confirmPassword"
-          label="Password:"
+          label="* Confirm Password:"
+          required
           onChange={this.onFormElementChange}
           defaultValue={this.state.confirmPassword}
         />
@@ -57,6 +76,8 @@ class RegisterForm extends Component {
         <div className="mt-1 mb-1">
           Already have an account? <Link to="/login">Login here.</Link>
         </div>
+
+        {this.state.error && <div className="u-color-error mb-1">{this.state.error}</div>}
 
         <input 
           type="submit" 
@@ -69,4 +90,4 @@ class RegisterForm extends Component {
   }
 }
 
-export default RegisterForm
+export default withRouter(RegisterForm)

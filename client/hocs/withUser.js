@@ -3,6 +3,13 @@ import getDisplayName from './getDisplayName'
 
 import * as api from '../utils/api'
 
+/* This is a higher order component you use to wrap a component if 
+ * you want to have access to the currently logged in user.
+ * 
+ * Usage:
+ * At the very end of the file `export default withUser(MyComponent)`.
+ * MyComponent will receive a `user`. See `components/Nav.js`.
+ */
 const withUser = (WrappedComponent) => {
   class WithUser extends Component {
     constructor(props) {

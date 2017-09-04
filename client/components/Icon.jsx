@@ -1,5 +1,10 @@
 import React from 'react';
 
+/* If you want to add more Icons to this file,
+ * visit `http://dmfrancisco.github.io/react-icons/`,
+ * look for icon that you want and paste the `case` code in switch statement.
+ */
+
 const Icon = ({ icon, size = 24, style }) => {
   function _mergeStyles(...args) {
     return Object.assign({}, ...args);
