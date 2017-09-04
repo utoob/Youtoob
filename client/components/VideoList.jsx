@@ -38,9 +38,11 @@ class VideoList extends Component {
     return (
       <div className="o-container o-container--medium mt-1">
         <ul className="video-list">
-          {this.state.videos.map((video) => (
+          {this.state.videos.length ? this.state.videos.map((video) => (
             <VideoListEntry key={video._id} video={video}/>
-          ))}
+          )) : (
+            <h1>No results found :(</h1>
+          )}
         </ul>
       </div>
     )

@@ -15,8 +15,6 @@ var UserSchema = new mongoose.Schema({
     index: true,
   },
   password: String,
-  image: String,
-  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Video' }]
 }, { 
   timestamps: true 
 })
@@ -24,28 +22,6 @@ var UserSchema = new mongoose.Schema({
 UserSchema.plugin(uniqueValidator, {message: 'is already taken.'})
 
 /* Instance Methods */
-
-UserSchema.methods.setPassword = function(password) {}
-
-UserSchema.methods.validPassword = function(password) {}
-
-UserSchema.methods.favorite = function(id) {
-  if (this.favorites.indexOf(id) === -1) {
-    this.favorites.push(id)
-  }
-  return this.save()
-}
-
-UserSchema.methods.unfavorite = function(id) {
-  this.favorites.remove(id)
-  return this.save()
-}
-
-UserSchema.methods.isFavorite = function(id) {
-  return this.favorites.some(favoriteId => {
-    return favoriteId.toString() === id.toString()
-  })
-}
 
 UserSchema.methods.generateJWT = function() {
   const today = new Date()
