@@ -64,6 +64,7 @@ class UploadForm extends Component {
           label="Title:"
           onChange={this.onFormElementChange}
           defaultValue={this.state.title}
+          required
         />
 
         <FormElement
@@ -72,6 +73,7 @@ class UploadForm extends Component {
           label="Description:"
           onChange={this.onFormElementChange}
           defaultValue={this.state.description}
+          required
         />
 
         <FormElement 
@@ -79,6 +81,7 @@ class UploadForm extends Component {
           name="videoFile"
           label="Video File:"
           onChange={this.onFormElementChange}
+          required
         />
 
         <Progress
