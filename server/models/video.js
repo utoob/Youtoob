@@ -33,6 +33,11 @@ VideoSchema.index(
   }
 )
 
+VideoSchema.methods.watch = function() {
+  this.viewCount += 1
+  return this
+}
+
 var Video = mongoose.model('Video', VideoSchema)
 
 export default Video
