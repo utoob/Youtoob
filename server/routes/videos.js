@@ -36,11 +36,12 @@ const getVideo = (req, res) => {
 
 const watchVideo = (req, res) => {
   const id = req.params.id
-  const query = { _id: id }
-  const update = { $inc: { viewCount: 1 } }
-  Video.findOneAndUpdate(query, update).then((video) => {
-    const filename = video.filename
-    res.sendFile(path.join(__dirname, `../../public/${filename}`))
+  Video.findById(id).then((video) => {
+    /* Uncomment this block once you have implemented the watch function */
+    // video.watch().save().then((video) => {
+      const filename = video.filename
+      res.sendFile(path.join(__dirname, `../../public/${filename}`))  
+    // })
   })
 }
 
