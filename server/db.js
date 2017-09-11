@@ -1,7 +1,13 @@
 import mongoose from 'mongoose'
 
+import { isTesting } from './config'
+
 mongoose.Promise = Promise
 
-mongoose.connect('mongodb://localhost/testing')
+const connectionString = isTesting
+  ? 'mongodb://localhost/testing_test'
+  : 'mongodb://localhost/testing'
+
+mongoose.connect(connectionString)
 
 export default mongoose
