@@ -4,6 +4,7 @@ import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
 
+import { isTesting, PORT } from './config'
 import userRoutes from './routes/users'
 import videoRoutes from './routes/videos'
 
@@ -17,6 +18,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'))
 })
 
-const server = app.listen(process.env.PORT || 3000, () => {
-  console.log(`Listening on port ${server.address().port}`)
-})
+if (isTesting) {
+  module.exports = app
+} else {
+  module.exports = app.listen(PORT, console.log(`Listening on port ${PORT}`))
+}

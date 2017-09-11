@@ -21,7 +21,11 @@ export const saveUserState = (user) => {
 }
 
 export const retrieveUserState = () => {
-  return JSON.parse(localStorage.getItem('user'))
+  try {
+    return JSON.parse(localStorage.getItem('user'))
+  } catch (e) {
+    return null
+  }
 }
 
 export const logout = () => {
@@ -42,6 +46,8 @@ export const login = ({ username, password }) => {
     .then(saveUserState)
 }
 
+// 1. Register function
+// Complete this register function
 export const register = ({ username, password }) => {
   const user = { username: username, password: password }
   return instance()
