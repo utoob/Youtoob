@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import Video from '../../server/models/video'
+import Video from '../../../server/models/video'
 
 test('can create an empty video', () => {
   const video = new Video()
