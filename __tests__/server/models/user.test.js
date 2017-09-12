@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import User from '../../server/models/user'
+import User from '../../../server/models/user'
 
 /* A function that takes in a callback and invokes it */
 const invokedFn = (cb) => cb()
