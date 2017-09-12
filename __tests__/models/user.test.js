@@ -1,7 +1,3 @@
-/**
- * @testEnvironment node
- */
-
 import mongoose from 'mongoose'
 import User from '../../server/models/user'
 
