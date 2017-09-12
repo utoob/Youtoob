@@ -9,3 +9,5 @@ module.exports = window.localStorage = {
   getItem: (key) => mockStorage[key],
   clear: () => mockStorage = {}
 };
+
+console.warn = () => {}

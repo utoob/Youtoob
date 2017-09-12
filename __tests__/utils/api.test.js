@@ -46,3 +46,4 @@ test('simulate register function', () => {
     expect(localStorage.getItem('user')).toEqual(JSON.stringify(testUser))
   })
 })
+
