@@ -12,8 +12,10 @@ const login = (req, res) => {
   })
 
   User.authenticate(user, (err, authenticatedUser) => {
-    if (err)
+    if (err) {
+      console.log(err)
       res.sendStatus(400)
+    }
     else
       res.json(authenticatedUser.toAuthJSON())
   })

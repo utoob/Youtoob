@@ -8,7 +8,6 @@ import { SECRET } from '../config'
 var UserSchema = new mongoose.Schema({
   username: {
     type: String,
-    lowercase: true,
     unique: true,
     required: [true, `can't be blank.`],
     match: [/^[a-zA-Z0-9]+$/, 'is invalid'],
@@ -62,7 +61,7 @@ User.authenticate = function(user, callback) {
     username: user.username
   }).then((foundUser) => {
     if (!foundUser) {
-      callback(true)
+      callback(new Error('User not found.'))
       return
     }
 
@@ -70,7 +69,8 @@ User.authenticate = function(user, callback) {
       if (isMatch) {
         callback(null, foundUser)
       } else {
-        callback(true)
+        console.log(user, foundUser)
+        callback(new Error('Password does not match.'))
       }
     })
   })

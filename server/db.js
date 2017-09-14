@@ -8,6 +8,6 @@ const connectionString = isTesting
   ? 'mongodb://localhost/testing_test'
   : 'mongodb://localhost/testing'
 
-mongoose.connect(connectionString)
+mongoose.connect(connectionString, { useMongoClient: true })
 
 export default mongoose

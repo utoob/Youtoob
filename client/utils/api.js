@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const instance = () => {
+export const instance = () => {
   const user = retrieveUserState()
   const config = Object.assign(
     { baseURL: 'http://localhost:3000/api' },
@@ -34,7 +34,7 @@ export const logout = () => {
   dispatchEvent(event)
 }
 
-const extractData = (response) => response.data
+export const extractData = (response) => response.data
 
 /* Server related API */
 
