@@ -4,7 +4,8 @@ const queryStringToObject = (qs) => {
   let obj = {}
   for (const keyValue of qs.split("&")) {
     const [key, value] = keyValue.split("=")
-    obj[key] = value
+    if (key && value)
+      obj[key] = value
   }
   return obj
 }
