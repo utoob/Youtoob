@@ -1,7 +1,7 @@
 import path from 'path'
 import webpack from 'webpack'
 
-const WDS_PORT = 7000
+import { isProd, WDS_PORT } from './server/config'
 
 export default {
   entry: [
@@ -9,6 +9,7 @@ export default {
   ],
   output: {
     filename: 'js/bundle.js',
+    path: path.resolve(__dirname, 'public'),
     publicPath: `http://localhost:${WDS_PORT}/`,
   },
   module: {
@@ -18,7 +19,7 @@ export default {
       { test: /\.(eot|svg|ttf|woff|woff2)$/, use: 'file-loader' },
     ],
   },
-  devtool: 'source-map',
+  devtool: isProd ? false : 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },

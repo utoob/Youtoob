@@ -17,7 +17,7 @@ const testUser = {
 }
 
 beforeAll((done) => {
-  server = app.listen(3000, done)
+  server = app.listen(3001, done)
 })
 
 afterEach((done) => {
