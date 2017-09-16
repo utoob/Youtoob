@@ -38,7 +38,7 @@ class Watch extends Component {
               <h2>{this.state.video.title}</h2>
               <p>Uploaded by: {uploaderName}</p>
               <p>{this.state.video.description}</p>
-              {/* <ViewCount viewCount={viewCount} /> */}
+              <ViewCount viewCount={viewCount} />
           </div>
           <div className="o-grid__cell">
             <h3>Recommended to Watch:</h3>
