@@ -7,15 +7,17 @@ import bodyParser from 'body-parser'
 import { isTesting, PORT } from './config'
 import userRoutes from './routes/users'
 import videoRoutes from './routes/videos'
+import renderApp from './renderApp'
 
 const app = express()
 
 app.use(bodyParser.json())
+app.use(express.static('public'))
 
 app.use('/api', userRoutes, videoRoutes)
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'))
+  res.send(renderApp())
 })
 
 if (isTesting) {

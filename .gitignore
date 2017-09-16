@@ -2,5 +2,8 @@
 
 package-lock.json
 
+/public/
+/dist/
+
 .DS_Store
 
