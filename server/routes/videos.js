@@ -17,7 +17,7 @@ const getVideos = (req, res) => {
 
   const query = Object.assign(
     {},
-    q && { $text: { $search: q } } // adds a text search if query is defined.
+    q && { $text: { $search: q } } // adds a text search if q is defined.
   )
 
   Video.find(query).then((videos) => {
