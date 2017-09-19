@@ -1,7 +1,7 @@
 import path from 'path'
 import webpack from 'webpack'
 
-import { isProd, WDS_PORT } from './server/config'
+import { isProd, WDS_PORT, HOST, PROTOCOL, PORT } from './server/config'
 
 export default {
   entry: [
@@ -31,6 +31,7 @@ export default {
     },
   },
   plugins: [
+    new webpack.DefinePlugin({ HOST, PROTOCOL, PORT }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
