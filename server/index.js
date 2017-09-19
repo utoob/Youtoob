@@ -1,3 +1,4 @@
+require('dotenv').config()
 import './db'
 import fs from 'fs'
 import path from 'path'

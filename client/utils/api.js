@@ -1,9 +1,15 @@
 import axios from 'axios'
 
+const HOST = process.env.HOST || 'localhost'
+const PROTOCOL = process.env.PROTOCOL || 'http://'
+const PORT = process.env.PORT || 3000
+
+const ENDPOINT = `${PROTOCOL}${HOST}:${PORT}/api`
+
 export const instance = (options = {}) => {
   const user = retrieveUserState()
   const config = Object.assign(
-    { baseURL: options.baseURL || 'http://localhost:3000/api' },
+    { baseURL: options.baseURL || ENDPOINT },
     user && { headers: { authorization: `Token ${user.token}` } }
   )
   return axios.create(config)
