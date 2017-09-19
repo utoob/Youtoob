@@ -31,7 +31,11 @@ export default {
     },
   },
   plugins: [
-    new webpack.DefinePlugin({ HOST, PROTOCOL, PORT }),
+    new webpack.DefinePlugin({ 
+      HOST: JSON.stringify(HOST), 
+      PROTOCOL: JSON.stringify(PROTOCOL), 
+      PORT: JSON.stringify(PORT) 
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),

@@ -1,9 +1,5 @@
 import axios from 'axios'
 
-const HOST = process.env.HOST || 'localhost'
-const PROTOCOL = process.env.PROTOCOL || 'http://'
-const PORT = process.env.PORT || 3000
-
 const ENDPOINT = `${PROTOCOL}${HOST}:${PORT}/api`
 
 export const instance = (options = {}) => {
@@ -86,5 +82,5 @@ export const getVideos = (q) => {
 }
 
 export const watchVideoUrl = (video) => {
-  return `http://localhost:3000/api/videos/${video._id}/watch`
+  return `${ENDPOINT}/videos/${video._id}/watch`
 }
