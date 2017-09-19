@@ -10,6 +10,7 @@ import app from '../../../server'
 const JWT_REGEX = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
 
 let server
+let apiInstance = api.instance({ baseURL: 'http://localhost:3001/api' })
 
 const testUser = {
   username: 'testUsername',
@@ -32,7 +33,7 @@ afterAll((done) => {
 })
 
 test('register endpoint should create a user', () => {
-  return api.instance().post('/register', testUser)
+  return apiInstance.post('/register', testUser)
     .then(api.extractData)
     .then((newUser) => {
       expect(newUser).toEqual({
@@ -46,7 +47,7 @@ test('register endpoint should create a user', () => {
 test('login endpoint should login a user', (done) => {
   var user = new User(testUser)
   User.register(user, (newUser) => {
-    api.instance().post('/login', testUser)
+    apiInstance.post('/login', testUser)
       .then(api.extractData)
       .then((loggedInUser) => {
         expect(loggedInUser).toEqual({

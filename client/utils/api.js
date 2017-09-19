@@ -1,9 +1,9 @@
 import axios from 'axios'
 
-export const instance = () => {
+export const instance = (options = {}) => {
   const user = retrieveUserState()
   const config = Object.assign(
-    { baseURL: 'http://localhost:3000/api' },
+    { baseURL: options.baseURL || 'http://localhost:3000/api' },
     user && { headers: { authorization: `Token ${user.token}` } }
   )
   return axios.create(config)
