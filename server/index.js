@@ -1,9 +1,9 @@
-require('dotenv').config()
 import './db'
 import fs from 'fs'
 import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
+import morgan from 'morgan'
 
 import { isTesting, PORT, PROTOCOL } from './config'
 import userRoutes from './routes/users'
@@ -13,10 +13,14 @@ import httpsOnly from './utils/httpsOnly'
 
 const app = express()
 
+// health check
+app.get('/health', (req, res) => res.send())
+
 if (PROTOCOL === 'https://') {
-  app.use(httpsOnly)
+  app.use(httpsOnly())
 }
 
+app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
