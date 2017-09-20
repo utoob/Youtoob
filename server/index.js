@@ -14,13 +14,13 @@ import httpsOnly from './utils/httpsOnly'
 const app = express()
 
 // health check
+app.use(morgan('combined'))
 app.get('/health', (req, res) => res.send())
 
 if (PROTOCOL === 'https://') {
   app.use(httpsOnly())
 }
 
-app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
