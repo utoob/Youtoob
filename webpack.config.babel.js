@@ -1,7 +1,8 @@
+require('dotenv').config()
 import path from 'path'
 import webpack from 'webpack'
 
-import { isProd, WDS_PORT, HOST, PROTOCOL, PORT } from './server/config'
+import { isProd, WDS_PORT, HOSTNAME, PROTOCOL, API_PORT } from './server/config'
 
 export default {
   entry: [
@@ -32,9 +33,9 @@ export default {
   },
   plugins: [
     new webpack.DefinePlugin({ 
-      HOST: JSON.stringify(HOST), 
-      PROTOCOL: JSON.stringify(PROTOCOL), 
-      PORT: JSON.stringify(PORT) 
+      'process.env.PROTOCOL': JSON.stringify(PROTOCOL), 
+      'process.env.HOSTNAME': JSON.stringify(HOSTNAME), 
+      'process.env.API_PORT': JSON.stringify(API_PORT) 
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
