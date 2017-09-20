@@ -1,6 +1,10 @@
 import axios from 'axios'
 
-const ENDPOINT = `${PROTOCOL}${HOST}:${PORT}/api`
+const PROTOCOL = process.env.PROTOCOL || 'http://'
+const HOSTNAME = process.env.HOSTNAME || 'localhost'
+const API_PORT = process.env.API_PORT || '3000'
+
+const ENDPOINT = `${PROTOCOL}${HOSTNAME}:${API_PORT}/api`
 
 export const instance = (options = {}) => {
   const user = retrieveUserState()
