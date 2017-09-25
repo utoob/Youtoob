@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import multer from 'multer'
 import path from 'path'
+import ThumbnailGenerator from 'video-thumbnail-generator';
 
 import * as auth from '../auth'
 import Video from '../models/video'
@@ -37,7 +38,6 @@ const getVideo = (req, res) => {
 const watchVideo = (req, res) => {
   const id = req.params.id
   Video.findById(id).then((video) => {
-    /* Uncomment this block once you have implemented the watch function */
     video.watch().save().then((video) => {
       const filename = video.filename
       res.sendFile(path.join(__dirname, `../../public/${filename}`))  
@@ -46,18 +46,28 @@ const watchVideo = (req, res) => {
 }
 
 const postVideos = (req, res) => {
-  const videoAttributes = Object.assign(
-    { 
-      title: req.body.title,
-      description: req.body.description,
-      filename: req.file.filename,
-    },
-    req.user && { uploader: req.user._id } // attaches the id if user is defined
-  )
+  const videoSourcePath = path.join(__dirname, `../../public/${req.file.filename}`)
+  const tg = new ThumbnailGenerator({
+    sourcePath: videoSourcePath,
+    thumbnailPath: 'public/thumbnail'
+  })
 
-  new Video(videoAttributes).save()
-    .then((video) => {
-      res.json(video)
+  tg.generateGif()
+    .then((thumbnailPath) => {
+      const videoAttributes = Object.assign(
+        {
+          title: req.body.title,
+          description: req.body.description,
+          filename: req.file.filename,
+          thumbnail: thumbnailPath.split("/")[2]
+        },
+        req.user && { uploader: req.user._id } // attaches the id if user is defined
+      )
+
+      new Video(videoAttributes).save()
+        .then((video) => {
+          res.json(video)
+        })
     })
 }
 
