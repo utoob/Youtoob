@@ -12,15 +12,15 @@ const renderApp = () => {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/blaze/dist/components.buttons.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/blaze@3.2.2/dist/utilities.sizes.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/blaze@3.2.2/dist/blaze.colors.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/blaze@3.2.2/dist/components.headings.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/blaze@3.2.2/dist/components.inputs.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/blaze@3.2.2/dist/components.input-groups.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/blaze@3.2.2/dist/components.progress.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/blaze@3.2.2/dist/objects.grid.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/blaze@3.2.2/dist/objects.grid.responsive.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/blaze@3.2.2/dist/objects.containers.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/blaze/dist/utilities.sizes.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/blaze/dist/blaze.colors.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/blaze/dist/components.headings.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/blaze/dist/components.inputs.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/blaze/dist/components.input-groups.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/blaze/dist/components.progress.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/blaze/dist/objects.grid.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/blaze/dist/objects.grid.responsive.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/blaze/dist/objects.containers.min.css">
     <script defer=true src=${bundlePath}></script>
   </head>
   <body>
