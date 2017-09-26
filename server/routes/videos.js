@@ -2,11 +2,11 @@ import express from 'express'
 import mongoose from 'mongoose'
 import multer from 'multer'
 import path from 'path'
-import ThumbnailGenerator from 'video-thumbnail-generator'
 
 import * as auth from '../auth'
 import Video from '../models/video'
 import User from '../models/user'
+import generateThumbnail from '../utils/generateThumbnail'
 
 const router = express.Router()
 const upload = multer({ dest: 'public' })
@@ -46,28 +46,19 @@ const watchVideo = (req, res) => {
 }
 
 const postVideos = (req, res) => {
-  const videoSourcePath = path.join(__dirname, `../../public/${req.file.filename}`)
-  const tg = new ThumbnailGenerator({
-    sourcePath: videoSourcePath,
-    thumbnailPath: 'public/thumbnail'
-  })
+  const videoAttributes = Object.assign(
+    {
+      title: req.body.title,
+      description: req.body.description,
+      filename: req.file.filename,
+      thumbnail: req.file.thumbnail
+    },
+    req.user && { uploader: req.user._id } // attaches the id if user is defined
+  )
 
-  tg.generateGif()
-    .then((thumbnailPath) => {
-      const videoAttributes = Object.assign(
-        {
-          title: req.body.title,
-          description: req.body.description,
-          filename: req.file.filename,
-          thumbnail: thumbnailPath.split("/")[2]
-        },
-        req.user && { uploader: req.user._id } // attaches the id if user is defined
-      )
-
-      new Video(videoAttributes).save()
-        .then((video) => {
-          res.json(video)
-        })
+  new Video(videoAttributes).save()
+    .then((video) => {
+      res.json(video)
     })
 }
 
@@ -79,6 +70,6 @@ router.get('/videos/:id', getVideo)
 
 router.get('/videos/:id/watch', watchVideo)
 
-router.post('/videos', auth.optional, upload.single('videoFile'), postVideos)
+router.post('/videos', auth.optional, upload.single('videoFile'), generateThumbnail, postVideos)
 
 export default router
