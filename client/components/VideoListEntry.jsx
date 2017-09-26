@@ -2,6 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { videoThumbnailUrl } from '../utils/api'
 
+const thumbnailStyles = {
+  display: 'block',
+  minWidth: '180px',
+  minHeight: '100px',
+  width: '180px',
+  height: '100px'
+}
+
 class VideoListEntry extends Component {
   render() {
     const { video: { _id, title, description } } = this.props;
@@ -11,8 +19,7 @@ class VideoListEntry extends Component {
 
         <img 
           src={`${videoThumbnailUrl(this.props.video)}`}
-          width="180" 
-          height="100"
+          style={thumbnailStyles}
         />
 
         <div className="stuff">
