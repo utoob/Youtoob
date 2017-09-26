@@ -8,6 +8,8 @@ import Video from '../server/models/video.js'
   Video.find({
     thumbnail: null
   }).then((videosWithoutThumbnail) => {
+
+    var savedPromises = []
     
     for (let video of videosWithoutThumbnail) {
       const videoSourcePath = path.join(__dirname, `../public/${video.filename}`)
@@ -17,16 +19,17 @@ import Video from '../server/models/video.js'
         thumbnailPath: 'public/thumbnail'
       })
 
-      tg.generateGif()
-        .then((thumbnailPath) => {
-          const thumbnail = thumbnailPath.slice("/")[2]
-
+      const promise = tg.generateOneByPercent(0, { size: "360x200" })
+        .then((thumbnail) => {
           video.thumbnail = thumbnail
           return video.save()
         })
         .catch(console.error)
+
+      savedPromises.push(promise)
     }
 
+    return Promise.all(savedPromises)
   })
   .then(() => {
     db.connection.close()

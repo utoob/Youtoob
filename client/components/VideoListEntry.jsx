@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { videoThumbnailUrl } from '../utils/api'
 
 class VideoListEntry extends Component {
   render() {
@@ -9,9 +10,9 @@ class VideoListEntry extends Component {
       <li className="video-list-entry">
 
         <img 
-          src="https://placeholdit.co//i/150x150?text=i%20am%20an%20image&bg=b1b1b1" 
-          width="75" 
-          height="75"
+          src={`${videoThumbnailUrl(this.props.video)}`}
+          width="180" 
+          height="100"
         />
 
         <div className="stuff">
