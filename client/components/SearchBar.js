@@ -39,7 +39,7 @@ class SearchBar extends Component {
         className="c-input-group"
         onSubmit={this.onSubmit}
       >
-        <div className="o-field">
+        <div className="o-field search-group">
           <input 
             className="c-field br2" 
             size="70"
