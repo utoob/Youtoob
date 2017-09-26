@@ -2,7 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import multer from 'multer'
 import path from 'path'
-import ThumbnailGenerator from 'video-thumbnail-generator';
+import ThumbnailGenerator from 'video-thumbnail-generator'
 
 import * as auth from '../auth'
 import Video from '../models/video'
