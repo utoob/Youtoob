@@ -154,3 +154,11 @@ body {
 .bg-white {
   background: white;
 }
+
+.as-fe {
+  align-self: flex-end;
+}
+
+.f-1 {
+  flex: 1
+}

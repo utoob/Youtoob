@@ -1,13 +1,13 @@
 import React from 'react'
 
-const ViewCount = ({ viewCount, prefix }) => {
+const ViewCount = ({ Tag = 'div', className, viewCount, prefix }) => {
   prefix = prefix || 'view'
   prefix += viewCount === 1 ? '' : 's'
 
   return (
-    <div className="view-count">
+    <Tag className={`viewCount ${className}`}>
       <span>{`${viewCount} ${prefix}`}</span>
-    </div>
+    </Tag>
   )
 }
 

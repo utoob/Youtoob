@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { videoThumbnailUrl } from '../utils/api'
+import ViewCount from './ViewCount'
 
 const thumbnailStyles = {
   display: 'block',
@@ -12,7 +13,7 @@ const thumbnailStyles = {
 
 class VideoListEntry extends Component {
   render() {
-    const { video: { _id, title, description } } = this.props;
+    const { video: { _id, title, description, viewCount } } = this.props;
 
     return (
       <li className="video-list-entry">
@@ -31,6 +32,7 @@ class VideoListEntry extends Component {
           </Link>
           
           <small>{description}</small>
+          <ViewCount viewCount={viewCount} Tag='small' />
         </div>
       </li>
     );
