@@ -22,7 +22,7 @@ class VideoListEntry extends Component {
           style={thumbnailStyles}
         />
 
-        <div className="stuff">
+        <div className="video-list-entry-right-container">
           <Link 
             to={`/videos/${_id}`} 
             className="video-list-entry-title u-color-brand"

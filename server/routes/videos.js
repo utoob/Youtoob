@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import multer from 'multer'
+import crypto from 'crypto'
 import path from 'path'
 
 import * as auth from '../auth'
@@ -9,7 +10,15 @@ import User from '../models/user'
 import generateThumbnail from '../utils/generateThumbnail'
 
 const router = express.Router()
-const upload = multer({ dest: 'public' })
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+  }
+})
+const upload = multer({ storage: storage })
 
 /* Route handlers */
 
@@ -40,7 +49,8 @@ const watchVideo = (req, res) => {
   Video.findById(id).then((video) => {
     video.watch().save().then((video) => {
       const filename = video.filename
-      res.sendFile(path.join(__dirname, `../../public/${filename}`))  
+      res
+        .sendFile(path.join(__dirname, `../../public/${filename}`))  
     })
   })
 }

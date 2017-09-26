@@ -1,3 +1,23 @@
+@media only screen and (max-width: 480px) {
+    .hidden-xs {
+        display: none !important;
+    }
+
+    .App {
+      font-size: 12px; 
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .hidden-md {
+        display: none !important;
+    }
+
+    .App {
+      font-size: 14px; 
+    }
+}
+
 html {
   box-sizing: border-box;
 }
@@ -121,7 +141,7 @@ body {
   font-weight: 600;
 }
 
-.stuff {
+.video-list-entry-right-container {
   margin-left: 0.5em;
   display: flex;
   flex-direction: column;

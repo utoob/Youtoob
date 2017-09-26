@@ -37,7 +37,7 @@ class Nav extends Component {
         <div className='app-nav-left'>
           <Link to='/' className="u-color-brand logo">
             <Icon icon='post-youtube' size="2em" />
-            <span>Youtoob</span>
+            <span className="hidden-xs">Youtoob</span>
           </Link>
           <SearchBar />
         </div>
