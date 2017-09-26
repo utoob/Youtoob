@@ -16,6 +16,10 @@
     .App {
       font-size: 14px; 
     }
+
+    .search-group {
+      width: 50%;
+    }
 }
 
 html {
