@@ -5,7 +5,7 @@ const HOSTNAME = process.env.HOSTNAME || 'localhost'
 const API_PORT = process.env.API_PORT || '3000'
 
 const ENDPOINT = `${PROTOCOL}${HOSTNAME}:${API_PORT}/api`
-const STATIC_ENDPOINT = `${PROTOCOL}${HOSTNAME}:${API_PORT}/`
+const STATIC_ENDPOINT = `${PROTOCOL}${HOSTNAME}:${API_PORT}`
 
 export const instance = (options = {}) => {
   const user = retrieveUserState()
@@ -86,8 +86,9 @@ export const getVideos = (q) => {
     .then(extractData)
 }
 
+
 export const watchVideoUrl = (video) => {
-  return `${ENDPOINT}/videos/${video._id}/watch`
+  return `${STATIC_ENDPOINT}/${video.filename}`
 }
 
 export const videoThumbnailUrl = (video) => {

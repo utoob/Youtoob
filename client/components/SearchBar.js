@@ -4,6 +4,10 @@ import { withRouter } from 'react-router-dom'
 import queryStringToObject from '../utils/queryStringToObject'
 import Icon from './Icon'
 
+const searchButtonStyles = {
+  marginLeft: '-1px'
+}
+
 class SearchBar extends Component {
   constructor(props) {
     super(props)
@@ -44,8 +48,11 @@ class SearchBar extends Component {
             defaultValue={this.state.query}
           />
         </div>
-        <button className="c-button c-button--brand">
-          <Icon icon='search' size="1.2em"/>
+        <button 
+          className="c-button c-button--brand"
+          style={searchButtonStyles}
+        >
+          <Icon icon='search' size="1.1em"/>
         </button>
       </form>
     )
