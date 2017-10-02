@@ -47,10 +47,6 @@ export const extractData = (response) => response.data
 
 export const login = ({ username, password }) => {
   const user = { username: username, password: password }
-  // Create a user object that has username and password attributes and assign it to the variable.
-  // return invocation of getAxiosInstance making a post request to `/login` with post body as user.
-  // then pass in extractData to the then block
-  // then pass in saveUserState to the then block
   return instance()
     .post('/login', user)
     .then(extractData)
