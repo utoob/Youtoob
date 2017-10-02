@@ -5,30 +5,19 @@
 
 import queryStringToObject from '../../client/utils/queryStringToObject'
 
-/* Write these tests, implement the function incrementally and pass the tests one by one.
- * 1. `a=1&b=2` should return { a: "1", b: "2" } (Already written for you)
- * 2. `?a=1&b=2` should return { a: "1", b: "2" }
- * 3. `=1&xc2&b=1` should return { b: "1" }
- * 4. `======` should return { }
- * 5. `?&&&&&&&` should return { }
+/* To pass the prompt: 
+ * - Write these tests, implement the function incrementally and pass the tests one by one.
+ * - Implement the function queryStringToObject in `client/utils/queryStringToObject`
+ *
+ * Test for these cases:
+ * 1. typeof queryStringToObject should be function
+ * 2. `a=1&b=2` should return { a: "1", b: "2" } (Already written for you)
+ * 3. `?a=1&b=2` should return { a: "1", b: "2" }
+ * 4. `=1&xc2&b=1` should return { b: "1" }
+ * 5. `======` should return { }
+ * 6. `?&&&&&&&` should return { }
  */
 
-test('`a=1&b=2` should return { a: "1", b: "2" }', () => {
-  expect(queryStringToObject(`a=1&b=2`)).toEqual({ a: "1", b: "2" })
-})
-
-test('`?a=1&b=2` should return { a: "1", b: "2" }', () => {
-  expect(queryStringToObject(`?a=1&b=2`)).toEqual({ a: "1", b: "2" })
-})
-
-test('`=1&xc2&b=1` should return { b: "1" }', () => {
-  expect(queryStringToObject(`=1&xc2&b=1`)).toEqual({ b: "1" })
-})
-
-test('`======` should return {}', () => {
-  expect(queryStringToObject(`======`)).toEqual({})
-})
-
-test('`?&&&&&&&` should return {}', () => {
-  expect(queryStringToObject(`?&&&&&&&`)).toEqual({})
+test('typeof queryStringToObject should be function', () => {
+  expect(typeof queryStringToObject).toEqual('function')
 })
