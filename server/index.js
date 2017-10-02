@@ -9,17 +9,12 @@ import { isTesting, PORT, PROTOCOL } from './config'
 import userRoutes from './routes/users'
 import videoRoutes from './routes/videos'
 import renderApp from './renderApp'
-import httpsOnly from './utils/httpsOnly'
 
 const app = express()
 
 // health check
 app.use(morgan('combined'))
 app.get('/health', (req, res) => res.send())
-
-if (PROTOCOL === 'https://') {
-  app.use(httpsOnly())
-}
 
 app.use(bodyParser.json())
 app.use(express.static('public'))

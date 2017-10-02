@@ -7,7 +7,6 @@ import path from 'path'
 import * as auth from '../auth'
 import Video from '../models/video'
 import User from '../models/user'
-import generateThumbnail from '../utils/generateThumbnail'
 
 const router = express.Router()
 const storage = multer.diskStorage({
@@ -61,7 +60,6 @@ const postVideos = (req, res) => {
       title: req.body.title,
       description: req.body.description,
       filename: req.file.filename,
-      thumbnail: req.file.thumbnail
     },
     req.user && { uploader: req.user._id } // attaches the id if user is defined
   )
@@ -80,6 +78,6 @@ router.get('/videos/:id', getVideo)
 
 router.get('/videos/:id/watch', watchVideo)
 
-router.post('/videos', auth.optional, upload.single('videoFile'), generateThumbnail, postVideos)
+router.post('/videos', auth.optional, upload.single('videoFile'), postVideos)
 
 export default router
