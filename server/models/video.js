@@ -34,7 +34,11 @@ VideoSchema.index(
   }
 )
 
+// This is how we declare an instance method
 VideoSchema.methods.watch = function() {
+  // this context refers to the instance of the class
+  // increment the viewCount of the instance
+  // return the instance
   this.viewCount += 1
   return this
 }
