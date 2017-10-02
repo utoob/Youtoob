@@ -20,15 +20,7 @@
 // 1. Only assign obj[key] = value if (key !== "") AND (value !== "").
 
 function queryStringToObject(queryString) {
-  if (queryString[0] === "?")
-    queryString = queryString.slice(1)
-  let obj = {}
-  for (const keyValue of queryString.split("&")) {
-    const [key, value] = keyValue.split("=")
-    if (key && value)
-      obj[key] = value
-  }
-  return obj  
+  
 }
 
 export default queryStringToObject
