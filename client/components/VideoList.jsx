@@ -28,6 +28,7 @@ class VideoList extends Component {
     api
       .getVideos(query)
       .then((videos) => {
+        console.log(videos)
         this.setState({ 
           videos: videos
         })

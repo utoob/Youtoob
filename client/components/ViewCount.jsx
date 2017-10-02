@@ -5,7 +5,7 @@ const ViewCount = ({ Tag = 'div', className, viewCount, prefix }) => {
   prefix += viewCount === 1 ? '' : 's'
 
   return (
-    <Tag className={`viewCount ${className}`}>
+    <Tag className={`view-count ${className}`}>
       <span>{`${viewCount} ${prefix}`}</span>
     </Tag>
   )
