@@ -5,9 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server | nodemon -e js,jsx --exec babel-node server/",
-    "prod:build": "rimraf dist && babel server -d dist && export NODE_ENV=production && webpack -p --progress",
-    "prod:start": "export NODE_ENV=production && pm2 start dist && pm2 logs",
-    "prod:stop": "pm2 delete dist",
     "test": "jest"
   },
   "keywords": [],
