@@ -92,7 +92,3 @@ export const getVideos = (q) => {
 export const watchVideoUrl = (video) => {
   return `${STATIC_ENDPOINT}/${video.filename}`
 }
-
-export const videoThumbnailUrl = (video) => {
-  return `${STATIC_ENDPOINT}/thumbnail/${video.thumbnail}`
-}

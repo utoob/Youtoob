@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { videoThumbnailUrl } from '../utils/api'
 import ViewCount from './ViewCount'
 
 const thumbnailStyles = {
@@ -17,11 +16,6 @@ class VideoListEntry extends Component {
 
     return (
       <li className="video-list-entry">
-
-        <img 
-          src={`${videoThumbnailUrl(this.props.video)}`}
-          style={thumbnailStyles}
-        />
 
         <div className="video-list-entry-right-container">
           <Link 
