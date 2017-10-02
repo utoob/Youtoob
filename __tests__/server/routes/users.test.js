@@ -3,9 +3,10 @@ import User from '../../../server/models/user'
 import * as api from '../../../client/utils/api'
 import app from '../../../server'
 
-/* This is going to be an integration tests which means testing combined parts of the system.
- * We will be setting up our database and tearing them down after each tests to
- * make each tests independent of one another.
+/* This is going to be an integration tests which means testing combined parts of the app.
+ * Here, the set up and tear down of databases has been done for you, it is important that
+ * you make each tests independent of each other by clearing up your database to avoid
+ * unforeseen testing errors.
  */
 
 const JWT_REGEX = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
@@ -43,36 +44,26 @@ afterAll((done) => {
 /* Objectives:
  * - Perform an integration test. To know more about integration tests
  *   read: https://en.wikipedia.org/wiki/Integration_testing
- * - This time, we are testing whether both register endpoint and User model works.
+ * - This time, we are testing both register endpoint and User model.
  * - We want to make sure that making a request to the endpoint will handle user creation.
- */
-
-/* To pass the prompt:
+ *
+ * To pass the prompt:
+ *
+ * Register endpoint should create a user
  *
  * 1. Make a post request to the register endpoint, passing in testUser as the post body.
- * 2. The api is going to return us a response object, we wanna extract the data out of it,
+ * 2. The api is going to return us a response object, we want to extract the data out of it,
  *    so invoke api.extractData to get the date out of the response object.
  * 3. Assert that the resolved value has the shape of what user.toAuthJSON() returns.
+ *    Have a look at `server/models/user.js`.
  * 4. Query the User model using the testUser.username and assert that the result is defined.
+ * 5. Invoke the done function to tell the environment that is has finished running.
  */
-test('register endpoint should create a user', (done) => {
-  apiInstance.post('/register', testUser)
-    .then(api.extractData)
-    .then((data) => {
-      expect(data).toEqual({
-        _id: expect.any(String),
-        username: testUser.username,
-        token: expect.stringMatching(JWT_REGEX)
-      })
 
-      User.find({ username: testUser.username }).then((newUser) => {
-        expect(newUser).toBeDefined()
-        done()
-      })
-    })
+test('Register endpoint should create a user', (done) => {
 })
 
-test('login endpoint should login a user', (done) => {
+test('Login endpoint should login a user', (done) => {
   var user = new User(testUser)
   User.register(user, (newUser) => {
     apiInstance.post('/login', testUser)

@@ -73,7 +73,7 @@ complicate things and get in the way.*
 - [ ] Open `__testing__/utils/api.test.js`, read the instruction and write some tests!
     
 ### Integration Testing
-- [ ] Open `__testing__/server/routes/users.test.js`, read the instruction and write sfome tests!
+- [ ] Open `__testing__/server/routes/users.test.js`, read the instruction and write some tests!
     
 ### React Component Testing
 - [ ] Open `__testing__/client/components/ViewCount.test.js`, read the instruction and write some tests!
