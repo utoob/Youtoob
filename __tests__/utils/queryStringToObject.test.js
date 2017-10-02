@@ -10,8 +10,8 @@ import queryStringToObject from '../../client/utils/queryStringToObject'
  * - Implement the function queryStringToObject in `client/utils/queryStringToObject`
  *
  * Test for these cases:
- * 1. typeof queryStringToObject should be function
- * 2. `a=1&b=2` should return { a: "1", b: "2" } (Already written for you)
+ * 1. typeof queryStringToObject should be function (Already written for you)
+ * 2. `a=1&b=2` should return { a: "1", b: "2" } 
  * 3. `?a=1&b=2` should return { a: "1", b: "2" }
  * 4. `=1&xc2&b=1` should return { b: "1" }
  * 5. `======` should return { }

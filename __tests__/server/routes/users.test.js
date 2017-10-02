@@ -61,6 +61,7 @@ afterAll((done) => {
  */
 
 test('Register endpoint should create a user', (done) => {
+  done()
 })
 
 test('Login endpoint should login a user', (done) => {
