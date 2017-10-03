@@ -10,14 +10,14 @@ test('can create an empty video', () => {
 })
 
 /* Our goal here is to unit test an instance method of our Video class.
- * We want to make sure that when video is watched, the viewCount of that video is incremented.
+ * We want to make sure that when a video is watched, the viewCount of that video is incremented.
  *
  * To pass the prompt: 
  * - Write these tests, implement the function incrementally and pass the tests one by one.
- * - Implement the function queryStringToObject in `client/utils/queryStringToObject`
+ * - Implement the function `watch` in `server/models/video.js`
  *
  * Test for these cases:
- * 1. Expect watch to be a function
- * 2. Expect viewCount to be incremented by 1 
- * 3. Expect the function to return itself
+ * 1. Expect watch to be a function.
+ * 2. Expect viewCount to be incremented by 1 after invoking watch.
+ * 3. Expect the function to return an instance of itself.
  */
