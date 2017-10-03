@@ -20,7 +20,7 @@ function generateSearchBar() {
 
 // Simulating onSubmit event should:
 // invoke history.push (changing url)
-test('simulate onSubmit event', () => {
+test.skip('simulate onSubmit event', () => {
   const { history, searchBarWrapper } = generateSearchBar()
   const form = searchBarWrapper.find('form')
   form.simulate('submit')
@@ -31,7 +31,7 @@ test('simulate onSubmit event', () => {
 // Simulating onChange event should:
 // invoke setState({query: <value>})
 // set the default value of input to state.query
-test('simulate onChange event', () => {
+test.skip('simulate onChange event', () => {
   const { searchBarWrapper } = generateSearchBar()
   const input = searchBarWrapper.find('input')
   input.simulate('change', { target: { value: 'testInput' } })

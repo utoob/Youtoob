@@ -70,13 +70,13 @@ complicate things and get in the way.*
 ### Unit Testing
 - [ ] Open `__testing__/client/utils/queryStringToObject.js`, read the instructions and write some tests!
 - [ ] Open `__testing__/server/models/video.test.js`, read the instructions and write some tests!
-- [ ] Open `__testing__/utils/api.test.js`, read the instruction and write some tests!
+- [ ] Open `__testing__/utils/api.test.js`, read the instructions and write some tests!
     
 ### Integration Testing
-- [ ] Open `__testing__/server/routes/users.test.js`, read the instruction and write some tests!
+- [ ] Open `__testing__/server/routes/users.test.js`, read the instructions and write some tests!
     
 ### React Component Testing
-- [ ] Open `__testing__/client/components/ViewCount.test.js`, read the instruction and write some tests!
+- [ ] Open `__testing__/client/components/ViewCount.test.js`, read the instructions and write some tests!
     
 ## Nightmare Mode:
 - [ ] Implement video thumbnails like the one shown here: https://youtoob.gabetr.in/
