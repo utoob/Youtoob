@@ -61,7 +61,7 @@ class UploadForm extends Component {
 
         <FormElement 
           name="title"
-          label="Title:"
+          label="* Title:"
           onChange={this.onFormElementChange}
           defaultValue={this.state.title}
           required
@@ -70,7 +70,7 @@ class UploadForm extends Component {
         <FormElement
           Tag="textarea"
           name="description"
-          label="Description:"
+          label="* Description:"
           onChange={this.onFormElementChange}
           defaultValue={this.state.description}
           required
@@ -79,7 +79,7 @@ class UploadForm extends Component {
         <FormElement 
           type="file"
           name="videoFile"
-          label="Video File:"
+          label="* Video File:"
           onChange={this.onFormElementChange}
           required
         />
