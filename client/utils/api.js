@@ -90,7 +90,7 @@ export const getVideos = (q) => {
 
 
 export const watchVideoUrl = (video) => {
-  return `${STATIC_ENDPOINT}/${video.filename}`
+  return `${ENDPOINT}/videos/${video._id}/watch`
 }
 
 export const videoThumbnailUrl = (video) => {
