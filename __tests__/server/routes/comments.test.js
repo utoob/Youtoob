@@ -22,15 +22,26 @@ afterAll((done) => {
   mongoose.connection.close(done)
 })
 
+const mockUsers = [{username: 'Alice'}, {username: 'Bob'}, {username: 'Carly'}]
+const generateUser = async (overrides = {}) => {
+
+  var newUser = await new User(Object.assign({},
+    { username: 'testUser' },
+    overrides.user
+  )).save()
+
+  return newUser
+}
 const generateUserAndVideo = async (overrides = {}) => {
   const promises = [
     new User(Object.assign({},
       { username: 'testUser' },
       overrides.user
-    )).save(), 
+    )).save(),
     new Video(overrides.video).save()
   ]
   const [user, video] = await Promise.all(promises)
+
   return {
     user,
     video
@@ -38,24 +49,31 @@ const generateUserAndVideo = async (overrides = {}) => {
 }
 
 const generateComment = async (overrides = {}) => {
-  const { user, video } = generateUserAndVideo()
   const commentAttributes = {
     userId: overrides.userId || user._id,
     videoId: overrides.videoId || video._id,
     text: overrides.text || 'testText'
   }
+  console.log(commentAttributes)
   return await new Comment(commentAttributes).save()
 }
 
-test.skip('should be able to get list of comments for a video', () => {
-  const { user, video } = generateUserAndVideo()
+test('should be able to get list of comments for a video', async (done) => {
+  const { user: user1, video: video1 } = await generateUserAndVideo({user: {username: 'Alice'}})
+  const { user: user2, video: video2 } = await generateUserAndVideo({user: {username: 'Bob'}})
+  console.log('users: ', user1, user2)
+  console.log('videos: ', video1, video2)
+  await generateComment({ userId: user1._id, videoId: video2._id, text: 'I am Alice' })
+  await generateComment({ userId: user2._id, videoId: video1._id, text: 'I am Bob' })
 
-  return apiInstance.get('/api/comments', { params: { videoId: video._id } })
+  return apiInstance.get('/comments', { params: { videoId: video1._id } })
     .then(api.extractData)
     .then((comments) => {
-      expect(typeof comments).toEqual('array')
-      // expect(comments)
+      expect(typeof comments).toEqual('object')
+      expect(comments.length).toEqual(1)
+      done()
     })
+
 })
 
 // test('should be able to create a comment', async () => {

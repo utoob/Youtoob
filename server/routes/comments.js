@@ -1,12 +1,24 @@
 import express from 'express'
 import Comment from '../models/comment'
+import mongoose from 'mongoose'
 
 const router = express.Router()
 
-const getComments = (req, res) => {
+const getComments = async (req, res) => {
   const videoId = req.query.videoId
   const limit = req.query.limit || 10
   const skip = req.query.limit
+  const Types = mongoose.Types
+
+  try {
+    console.log('video id for comment: ', videoId)
+    var videoComments = await Comment.find({ videoId: Types.ObjectId(videoId) })
+    console.log('comments from db: ', videoComments)
+    res.send( videoComments )
+  } catch(err) {
+    console.log(err)
+    res.status(500).send('oops')
+  }
 }
 
 const postComments = (req, res) => {
@@ -21,5 +33,11 @@ const postComments = (req, res) => {
       res.json(comment)
     })
 }
+
+/* Hook router to route handlers */
+
+router.get('/comments', getComments)
+
+router.post('/comments', postComments)
 
 export default router

@@ -8,6 +8,7 @@ import morgan from 'morgan'
 import { isTesting, PORT, PROTOCOL } from './config'
 import userRoutes from './routes/users'
 import videoRoutes from './routes/videos'
+import commentRoutes from './routes/comments'
 import renderApp from './renderApp'
 import httpsOnly from './utils/httpsOnly'
 
@@ -24,7 +25,7 @@ if (PROTOCOL === 'https://') {
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
-app.use('/api', userRoutes, videoRoutes)
+app.use('/api', userRoutes, videoRoutes, commentRoutes)
 
 app.get('*', (req, res) => {
   res.send(renderApp())
