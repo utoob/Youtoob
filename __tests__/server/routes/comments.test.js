@@ -1,3 +1,4 @@
+import axiosist from 'axiosist'
 import mongoose from '../../../server/db'
 import User from '../../../server/models/user'
 import Video from '../../../server/models/video'
@@ -6,11 +7,8 @@ import * as api from '../../../client/utils/api'
 import app from '../../../server'
 
 let server
-let apiInstance = api.instance({ baseURL: 'http://localhost:3001/api' })
+let apiInstance = axiosist(app)
 
-beforeAll((done) => {
-  server = app.listen(3001, done)
-})
 
 afterEach((done) => {
   Promise.all([
@@ -21,10 +19,7 @@ afterEach((done) => {
 })
 
 afterAll((done) => {
-  mongoose.connection.close(() => {
-    done()
-    server.close()
-  })
+  mongoose.connection.close(done)
 })
 
 const generateUserAndVideo = async (overrides = {}) => {
@@ -55,7 +50,7 @@ const generateComment = async (overrides = {}) => {
 test.skip('should be able to get list of comments for a video', () => {
   const { user, video } = generateUserAndVideo()
 
-  return apiInstance.get('/comments', { params: { videoId: video._id } })
+  return apiInstance.get('/api/comments', { params: { videoId: video._id } })
     .then(api.extractData)
     .then((comments) => {
       expect(typeof comments).toEqual('array')
@@ -71,7 +66,7 @@ test.skip('should be able to get list of comments for a video', () => {
 //     text: "Awesome Video"
 //   }
 
-//   return apiInstance.post('/comments', testComment)
+//   return apiInstance.post('/api/comments', testComment)
 //     .then(api.extractData)
 //     .then((newComment) => {
 //       expect(newComment).toEqual({
