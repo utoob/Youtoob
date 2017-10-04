@@ -1,3 +1,4 @@
+import axiosist from 'axiosist'
 import mongoose from '../../../server/db'
 import User from '../../../server/models/user'
 import * as api from '../../../client/utils/api'
@@ -10,22 +11,12 @@ import app from '../../../server'
 
 const JWT_REGEX = /^[A-Za-z0-9-_=]+\.[A-Za-z0-9-_=]+\.?[A-Za-z0-9-_.+/=]*$/
 
-let server
-let apiInstance = api.instance({ baseURL: 'http://localhost:3001/api' })
+let apiInstance = axiosist(app)
 
 const testUser = {
   username: 'testUsername',
   password: 'testPassword'
 }
-
-beforeAll((done) => {
-  // We want to initialize our server just before we run all of the tests
-  // Note that it is a separate instance of our app and it is running on port 3001
-  // We want to invoke the `done` function to indicate we are finished with beforeAll setup.
-  server = app.listen(3001, () => {
-    done()
-  })
-})
 
 afterEach((done) => {
   // We want to make sure that tests run independent of each other
@@ -34,10 +25,7 @@ afterEach((done) => {
 })
 
 afterAll((done) => {
-  mongoose.connection.close(() => {
-    done()
-    server.close()
-  })
+  mongoose.connection.close(done)
 })
 
 /* Objectives:
@@ -56,7 +44,7 @@ afterAll((done) => {
  * 4. Query the User model using the testUser.username and assert that the result is defined.
  */
 test('register endpoint should create a user', (done) => {
-  apiInstance.post('/register', testUser)
+  apiInstance.post('/api/register', testUser)
     .then(api.extractData)
     .then((data) => {
       expect(data).toEqual({
@@ -75,7 +63,7 @@ test('register endpoint should create a user', (done) => {
 test('login endpoint should login a user', (done) => {
   var user = new User(testUser)
   User.register(user, (newUser) => {
-    apiInstance.post('/login', testUser)
+    apiInstance.post('/api/login', testUser)
       .then(api.extractData)
       .then((loggedInUser) => {
         expect(loggedInUser).toEqual({
