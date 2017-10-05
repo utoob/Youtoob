@@ -10,4 +10,8 @@ const connectionString = isTesting
 
 mongoose.connect(connectionString, { useMongoClient: true })
 
+mongoose.connection.on('error',function (err) {
+  console.log('Mongoose default connection error: ' + err);
+});
+
 export default mongoose
