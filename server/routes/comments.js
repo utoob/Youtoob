@@ -1,6 +1,7 @@
 import express from 'express'
 import Comment from '../models/comment'
 import mongoose from 'mongoose'
+import Video from '../models/video'
 
 const router = express.Router()
 
@@ -8,32 +9,36 @@ const getComments = async (req, res) => {
   const videoId = req.query.videoId
   const limit = req.query.limit || 10
   const skip = req.query.limit
-  const Types = mongoose.Types
 
   try {
-    console.log('video id for comment: ', videoId)
-    var videoComments = await Comment.find({ videoId: Types.ObjectId(videoId) })
-    console.log('comments from db: ', videoComments)
-    res.send( videoComments )
+    var videoComments = await Comment.find({ videoId })
+    res.json( videoComments )
   } catch(err) {
     console.log(err)
-    res.status(500).send('oops')
+    res.status(500).send('Cannot find comments for video')
   }
 }
 
-const postComments = (req, res) => {
-  const commentAttributes = {
-    text: req.body.text,
-    videoId: req.body.videoId, // TODO: make sure the video exist
-    userId: req.user._id
+const postComments = async (req, res) => {
+  if(! await videoExists(req.body.videoId)) {
+    console.log('DOESNT EXIST')
+    res.status(404).send('Video with that id does not exist')
   }
 
+  const commentAttributes = {
+    text: req.body.text,
+    videoId: req.body.videoId,
+    userId: req.body.userId
+  }
   new Comment(commentAttributes).save()
     .then((comment) => {
       res.json(comment)
     })
 }
 
+const videoExists = async function (videoId) {
+  return !!await Video.findById(videoId)
+}
 /* Hook router to route handlers */
 
 router.get('/comments', getComments)
