@@ -19,12 +19,18 @@ A good testing suite serves as a documentation for other developers to learn how
 - Gain familiarity with the tools necessary to perform software testing.
 
 ## Set up:
+Make sure you have node version of 8.5 or higher.    
 1. Clone the repo:    
 `$ git clone https://github.com/ArchangelGabriel/Youtoob`    
 `$ cd Youtoob && npm install`    
 
-2. After cloning the repo, make sure that all of the tests passes.    
-`$ npm test`
+2. After cloning the repo, run:    
+```
+$ npm test
+// All of the tests should pass.
+// If any of the tests are failing, 
+// double check that you have the correct version of node installed.
+```
     
 **As you can see, we have a number of tests that are passing successfully. 
 It is essential that whenever we build additional features, we don’t break previously written tests.**
