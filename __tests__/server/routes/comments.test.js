@@ -186,7 +186,6 @@ test('a user should be able to edit comments they own', async () => {
   genComm.text = editedComment.text
   await apiInstance.put('/api/comments', genComm)
     .then(async ({ data: { _id } }) => {
-      console.log('asdf',_id)
       const newComment = await Comment.findById(_id)
       expect(newComment).toEqual(expect.objectContaining({text: editedComment.text }))
     })

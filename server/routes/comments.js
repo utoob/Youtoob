@@ -32,11 +32,10 @@ const postComments = async (req, res) => {
 
 const editComment = async (req, res) => {
   const { _id: commentId, userId, text } = req.body
-  console.log('asdfasd', req.body)
+
   try {
     const target = await Comment.findOneAndUpdate( {_id: commentId, userId }, { $set:{ text }})
 
-    console.log(target)
     res.json(target)
   } catch(err) {
     console.log(err)
@@ -69,13 +68,7 @@ const validateComment = async (req, res, next) => {
   }
 }
 
-
-  // if(! await videoExists(req.body.videoId)) {
-  //   console.log('DOESNT EXIST')
-  //   res.status(404).json({ error: 'Video with that id does not exist' })
-  // }
 /* Hook router to route handlers */
-
 
 router.get('/comments', getComments)
 
@@ -83,8 +76,4 @@ router.post('/comments', validateComment, postComments)
 
 router.put('/comments', editComment)
 
-// router.use(function(error, req, res, next) {
-//   // Won't get here, because Express doesn't catch the above error
-//   res.json({ message: error.message });
-// });
 export default router
