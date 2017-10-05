@@ -24,13 +24,9 @@ const postComments = async (req, res) => {
     console.log('DOESNT EXIST')
     res.status(404).send('Video with that id does not exist')
   }
+  const { text, videoId, userId } = req.body
 
-  const commentAttributes = {
-    text: req.body.text,
-    videoId: req.body.videoId,
-    userId: req.body.userId
-  }
-  new Comment(commentAttributes).save()
+  new Comment(Object.assign({}, { text, videoId, userId })).save()
     .then((comment) => {
       res.json(comment)
     })
