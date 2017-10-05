@@ -171,7 +171,7 @@ test('should be able to get list of comments for a video', async () => {
 // Update
 //
 
-test.only('a user should be able to edit comments they own', async () => {
+test('a user should be able to edit comments they own', async () => {
 
   const originalComment = {
     userId: USER.string_id,
