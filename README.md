@@ -20,19 +20,21 @@ A good testing suite serves as a documentation for other developers to learn how
 
 ## Set up:
 Make sure you have node version of 8.5 or higher.    
-1. Clone the repo:    
-`$ git clone https://github.com/ArchangelGabriel/Youtoob`    
-`$ cd Youtoob && npm install`    
+1. Clone the repo:
+`$ git clone https://github.com/ArchangelGabriel/Youtoob`
+`$ cd Youtoob && npm install`
 
 2. After cloning the repo, run:    
 ```
 $ npm test
-// All of the tests should pass.
-// If any of the tests are failing, 
+// Most of the tests should pass.
+// If any of the tests are failing,
 // double check that you have the correct version of node installed.
+// Also if less than 9 of the tests are passing and you are on a 
+// Windows machine make sure you have Mongo installed globally.
 ```
     
-**As you can see, we have a number of tests that are passing successfully. 
+**As you can see, we have a number of tests that are passing successfully.
 It is essential that whenever we build additional features, we don’t break previously written tests.**
     
 *We will not be covering webpack in this sprint but it is essential that it is set up to run our tools successfully. 
